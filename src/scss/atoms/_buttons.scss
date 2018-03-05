@@ -42,6 +42,11 @@ textarea:focus {
   padding: 0.5rem 1rem;
   background-color: $clr_my-sin;
   @extend %border-radius-std;
+  &:hover,
+  &[data-state="is-active"] {
+    background-color: $clr_congress-blue;
+    color: $clr_my-sin;
+  }
 }
 
 .button-tertiary {
