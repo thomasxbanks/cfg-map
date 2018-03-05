@@ -1,0 +1,10 @@
+<a
+  class="button button-default"
+  href="<%= locals.uri %>"
+  title="<%= locals.title %>"
+  <% if (locals.destination == 'external') { %>
+    target="_blank"
+    rel="nofollow noopener"<% } %>
+  >
+  <%= locals.copy %>
+</a>

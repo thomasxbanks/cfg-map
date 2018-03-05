@@ -1,0 +1,51 @@
+%semantic-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+%padding-top {
+  padding-top: 2rem;
+}
+
+%padding-right {
+  padding-right: 1.5rem;
+}
+
+%padding-bottom {
+  padding-bottom: 3rem;
+}
+
+%padding-left {
+  padding-left: 1.5rem;
+}
+
+%padding-v {
+  @extend %padding-top;
+  @extend %padding-bottom;
+}
+
+%padding-h {
+  @extend %padding-right;
+  @extend %padding-left;
+}
+
+%padding {
+  @extend %padding-v;
+  @extend %padding-h;
+}
+
+%border-bottom-thin {
+  border-bottom: 0.0625rem solid $clr_alto;
+}
+
+%border-radius-sml {
+  border-radius: 0.125rem;
+}
+
+%border-radius-std {
+  border-radius: 0.25rem;
+}
+
+%border-radius-lozenge {
+  border-radius: 100rem;
+}

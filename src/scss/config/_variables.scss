@@ -1,0 +1,13 @@
+/*
+  Defined, resuable variables for this build
+*/
+
+// Baseline is used for calculating all measurements
+// This ensures consistency across the build
+$baseline: 16px;
+$bl: $baseline;
+$b: $baseline;
+$max-width: 1440px;
+@import 'colors';
+@import 'fonts';
+@import 'transitions';

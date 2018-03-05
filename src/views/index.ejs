@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<%- include('shared/head') %>
+
+<body id="interactive-map" data-state="is-active" style="overflow: hidden; position: relative;">
+	<%- include('shared/masthead') %>
+	<main class="grid" style="background-image: url(https://www.wired.com/wp-content/uploads/2016/11/GoogleMap-1-1200x630-e1479510841629.jpg);">
+		<% // @TODO: switch these tempates around when the API key arrives! %>
+		<% if (locals.statusCode <= 200) { %>
+
+			<%- include('content/error', {locals}) %>
+
+		<% } else { %>
+
+			<%- include('content/home', {locals}) %>
+			
+		<% } %>
+	</main>
+	<script src="js/app.js" charset="utf-8"></script>
+</body>
+
+</html>

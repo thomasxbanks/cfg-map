@@ -1,0 +1,102 @@
+// Influenced by BBC GEL guidelines (http://www.bbc.co.uk/gel/guidelines/typography)
+// %SilentClasses for extension use only.
+// @extend these basic font stylings for specific content blocks to maintain
+// consistency across the build.
+// Extra marks awwwarded for those who got the Sopranos references.
+%tony {
+  font-family: $font_face-medium;
+  font-size: $font_size-xlg;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: 900;
+  font-style: normal;
+}
+
+%silvio {
+  font-family: $font_face-medium;
+  font-size: $font_size-xlg;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+%paulie {
+  font-family: $font_face-medium;
+  font-size: $font_size-med;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: 900;
+  font-style: normal;
+}
+
+%chris {
+  font-family: $font_face-main;
+  font-size: $font_size-med;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: 900;
+  font-style: normal;
+}
+
+%ralphie {
+  font-family: $font_face-medium;
+  font-size: $font_size-lrg;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+%richie {
+  font-family: $font_face-main;
+  font-size: $font_size-std;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+%bobby {
+  font-family: $font_face-main;
+  font-size: $font_size-std;
+  text-transform: uppercase;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: normal;
+  font-style: normal;
+}
+
+%junior {
+  font-family: $font_face-main;
+  font-size: $font_size-xsm;
+  text-transform: uppercase;
+  font-smooth: auto;
+  font-size-adjust: none;
+  font-variant: normal;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-weight: normal;
+  font-style: normal;
+}

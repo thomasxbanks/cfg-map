@@ -1,0 +1,23 @@
+// Face Stack/Family
+$font_face-main: "GT Walsheim",
+cursive,
+sans-serif;
+$font_face-medium: "GT Walsheim Medium",
+cursive,
+sans-serif;
+$font_face-bold: "GT Walsheim Bold",
+cursive,
+sans-serif;
+// Font Sizes
+$font_size-xsm: ($b * 0.5625); // 9px
+$font_size-sml: ($b * 1.2);
+$font_size-std: ($b * 0.875); // 14px
+$font_size-med: ($b * 1); // 16px
+$font_size-lrg: ($b * 1.5); // 24px
+$font_size-xlg: ($b * 4);
+// Calculate line-heights
+$lh: 1.66em;
+// Font Colors
+$font_color-main: $clr_black;
+$font_color-invert: $clr_white;
+$font_color-light: lighten($font_color-main, 20%);

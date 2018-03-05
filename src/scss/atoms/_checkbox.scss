@@ -1,0 +1,39 @@
+label.fancy-checkbox {
+  display: block;
+  line-height: 1.25rem;
+  padding: 1.5rem;
+  @extend %border-bottom-thin;
+  &:hover {
+    background: $clr_wild-sand;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    left: -50000px;
+    &:checked+.checkbox {
+      background: $clr_congress-blue;
+      border: 1px solid $clr_congress-blue;
+    }
+    &:checked+.checkbox+.label {
+      color: $clr_congress-blue;
+    }
+  }
+  .checkbox {
+    display: inline-block;
+    background: $clr_white;
+    border: 1px solid $clr_dusty-grey;
+    @extend %border-radius-std;
+    width: 1.25rem;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    color: $clr_white;
+    padding: 0;
+    margin: 0 1.5rem 0 0;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: top;
+  }
+  .label {
+    display: inline-block;
+    @extend %richie;
+  }
+}

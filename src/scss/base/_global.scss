@@ -1,0 +1,75 @@
+html {
+	font-size: 16px;
+}
+
+body {
+	background: $clr_wild-sand;
+	color: $clr_mine-shaft;
+}
+
+%central-column,
+.central-column {
+	max-width: $max-width;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.grid {
+	@extend %grid;
+	@extend %grid_container;
+	@extend %grid_row;
+	@extend %grid_wrap;
+	@extend %justify-between;
+	@extend %align-stretch;
+}
+
+.central-column {
+	padding: 0 1rem;
+}
+
+#masthead {
+	background-color: $clr_congress-blue;
+	.logo {
+		max-width: 100%;
+		max-height: 34px;
+		object-fit: contain;
+		margin: 1rem auto;
+	}
+	.col-third {
+		flex-basis: 33.33%;
+		flex-grow: 3;
+	}
+	.searchbar {
+		float: right;
+		display: inline-flex;
+		align-items: center;
+		input {
+			position: absolute;
+			opacity: 0;
+			left: -50000px;
+			width: 0;
+			overflow: hidden;
+			transition: $ease-swoosh $speed-std;
+		}
+		&[data-state="open"] input {
+			width: calc(100% - 5rem);
+			max-width: calc(21.5rem - 4rem - 4px);
+			top: 1rem;
+			right: 4rem;
+			left: auto;
+			opacity: 1;
+			@media (min-width: 1035px) {
+				position: static;
+				width: 100%;
+			}
+		}
+	}
+}
+
+main.grid {
+	@extend %grid;
+	@extend %grid_row;
+	@extend %grid_wrap;
+	@extend %justify-between;
+	@extend %align-stretch;
+}

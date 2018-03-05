@@ -1,0 +1,12 @@
+<header id="masthead">
+  <div class="grid">
+    <div class="left-icons col-third masthead-menu-link">
+      <% // @TODO: Is this even necessary? There's a toggle attached to the sidebar %>
+      <button style="display: none;" class="js-toggle-sidebar material-icons" data-target="sidebar-left">menu</button>
+    </div>
+    <img class="logo col-third" src="/img/logo.png" alt="">
+    <div class="right-icons col-third">
+      <%- include('searchbar.ejs') %>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,33 @@
+[class*="content"] {
+	// Unordered Lists in content blocks
+	ul {
+		list-style-type: none;
+		padding-left: 1rem;
+		li {
+			&:before {
+				content: "";
+				background-color: $clr_congress-blue;
+				transform: translateY(-250%);
+				margin-right: 1rem;
+				display: inline-block;
+				width: 10px;
+				height: 2px;
+			}
+		}
+	} // Ordered Lists in content blocks
+	ol {
+		list-style-type: none;
+		padding-left: 1rem;
+		li {
+			counter-increment: count-me;
+			&:before {
+				content: counter(count-me);
+				margin-right: 1rem;
+				display: inline-block;
+				width: 10px;
+				color: $clr_congress-blue;
+				font-weight: bold;
+			}
+		}
+	}
+}

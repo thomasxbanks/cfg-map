@@ -1,0 +1,9 @@
+// Transition Easings
+$ease-main: cubic-bezier(.66, .04, .51, .92);
+$ease-swoosh: cubic-bezier(.53, -0.4, .81, 1.46);
+// Transition Speeds
+$speed-fastest: 80ms;
+$speed-fast: 150ms;
+$speed-std: 300ms;
+$speed-slow: 600ms;
+$speed-slowest: 1000ms;

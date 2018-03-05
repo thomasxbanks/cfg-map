@@ -1,0 +1,43 @@
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  tr {
+    @extend %grid;
+    &:not(.no-border) {
+      th,
+      td {
+        @extend %border-bottom-thin;
+      }
+    }
+    th,
+    td {
+      @extend %richie;
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+    th {
+      text-align: left;
+      flex-grow: 1;
+      padding-right: 0.5rem;
+      padding-left: 1rem;
+    }
+    td {
+      text-align: right;
+      width: auto;
+      padding-right: 1rem;
+      padding-left: 0.5rem;
+    }
+  }
+  &.bold-label {
+    th {
+      font-family: $font_face-bold;
+    }
+  }
+  &.bold-value {
+    td {
+      font-family: $font_face-medium;
+    }
+  }
+}

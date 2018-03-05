@@ -1,0 +1,27 @@
+// Styles for links.
+// Remember that these styles will also affect <a> tags such as anchors or ones you want to style as buttons
+// Probably best to not define display: block !important; here!
+a:not(.button) {
+	color: $clr_congress-blue;
+}
+
+a:not(.button):link {
+	color: $clr_congress-blue;
+}
+
+a:not(.button):hover {
+	color: lighten($clr_congress-blue, 10%);
+}
+
+a:not(.button):active {
+	color: lighten($clr_congress-blue, 50%);
+}
+
+a:not(.button):visited {
+	color: darken($clr_congress-blue, 10%);
+}
+
+a.button {
+	@extend button;
+	text-decoration: none;
+}

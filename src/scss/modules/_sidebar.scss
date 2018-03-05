@@ -1,0 +1,125 @@
+.sidebar {
+  .inner {
+    height: 100%;
+    overflow-y: auto;
+    @extend %grid;
+    @extend %grid_column;
+    @extend %justify-start;
+    @extend %align-center;
+  }
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: calc(100% - 6rem);
+  max-width: 21.5rem;
+  height: 100vh;
+  transition: transform $ease-main $speed-std;
+  &.sidebar-right {
+    right: 0;
+    background-color: rgba($clr_white, 0.9);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+  &.sidebar-left {
+    left: 0;
+    background-color: $clr_white;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+  &[data-state="not-active"] {
+    &.sidebar-right {
+      transform: translateX(100%);
+    }
+    &.sidebar-left {
+      transform: translateX(-100%);
+    }
+  }
+  &[data-state="is-active"] {
+    &.sidebar-right {
+      transform: translateX(0);
+    }
+    &.sidebar-left {
+      transform: translateX(0);
+    }
+  }
+}
+
+.content.with-sidebars {
+  flex-grow: 1;
+  @extend %richie;
+}
+
+.sidebar article {
+  @extend %padding;
+  background: $clr_maroon-flush;
+  color: $clr_white;
+  .title {
+    @extend %ralphie;
+    margin-bottom: 1rem;
+  }
+  p {
+    @extend %richie;
+    line-height: 1.5em;
+  }
+}
+
+.toggle-sidebar {
+  position: absolute;
+  top: 1rem;
+  z-index: 0;
+  color: $clr_boulder;
+  background: rgba($clr_white, 0.9);
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  line-height: 3rem;
+  padding-top: 19.5px;
+  padding-right: 10.5px;
+  padding-bottom: 19.5px;
+  padding-left: 8.5px;
+  .sidebar-right & {
+    left: 0;
+    transform: translateX(-100%) rotate(180deg);
+  }
+  .sidebar-left & {
+    right: 0;
+    transform: translateX(100%);
+  }
+}
+
+.sidebar-left {
+  form {
+    width: 100%;
+  }
+}
+
+.sidebar-right {
+  padding-top: 1rem;
+  .data-table:first-of-type {
+    th,
+    td {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+  .button_wrapper {
+    font-size: 0;
+    .button-tertiary {
+      display: block;
+      margin: 0.5rem 0;
+      @media (min-width: 769px) {
+        display: inline-block;
+        margin-top: 0;
+        &:not(:last-child) {
+          margin-right: 0.5rem;
+        }
+        margin-bottom: 0;
+        margin-left: 0;
+      }
+    }
+  }
+  .button_wrapper {
+    width: 100%;
+    margin-top: auto;
+    @extend %padding;
+    .button-secondary {
+      width: 100%;
+    }
+  }
+}
