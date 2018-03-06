@@ -10,6 +10,8 @@ window.onload = () => {
     sidebar.style.height = `calc(100vh - ${mastheadHeight})`;
   });
   document.querySelector('main').style.height = `calc(100vh - ${mastheadHeight})`;
+  document.querySelector('main').style.paddingTop = `${mastheadHeight}`;
+  document.querySelector('#map').style.height = `calc(100vh - ${mastheadHeight})`;
 
   const changeChevronDirection = (element, direction) => {
     element.innerText = `chevron_${direction}`;

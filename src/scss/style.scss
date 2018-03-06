@@ -36,14 +36,3 @@ html.redline * {
 @import "modules/nav";
 @import "modules/card";
 @import "modules/sidebar";
-#interactive-map {
-	transition: transform $ease-swoosh $speed-slow, opacity $ease-main $speed-slow;
-	&[data-state="is-active"] {
-		transform: scale(1);
-		opacity: 1;
-	}
-	&[data-state="not-active"] {
-		transform: scale(0);
-		opacity: 0;
-	}
-}

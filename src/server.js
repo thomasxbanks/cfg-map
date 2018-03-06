@@ -17,49 +17,82 @@ app.locals = {
 };
 
 app.get(['/'], function(req, res) {
-  var bar = require('./modules/module.js');
   res.locals.page = 'home';
-  res.locals.log = bar();
   var axios = require('axios');
-  var apiVersion = `v1`;
-  var protocol = `https://`;
-  var domain = `api.vision-mapping.com/`;
+  var apiVersion = 'v1';
+  var protocol = 'https://';
+  var domain = 'api.vision-mapping.com/';
   var data = {
-    'coordinates': `fyn/${apiVersion}/coordinates/`,
-    'getBoundaries': `data/areas/${apiVersion}/getBoundaries/`,
-    'getLocations': `data/locations/${apiVersion}/`
+    'coordinates': `fyn/${apiVersion}/coordinates`,
+    'getBoundaries': `data/areas/v1/getBoundaries`,
+    'getLocations': `data/locations/${apiVersion}`
   };
   var method = {
-    'create': `create`,
-    'post': `post`
+    'create': 'create',
+    'post': 'post'
   };
   var parameters = {
-    'apiKey': `rbWKjpcDJ5BDPtT0tcyCxkhcslqQWbmq9jtvNM7H`
+    'apiKey': 'rbWKjpcDJ5BDPtT0tcyCxkhcslqQWbmq9jtvNM7H'
   };
-  
-  var endpoint = `${protocol}${domain}${data.getBoundaries}${method.post}`;
+  var mapLayerKey = {
+    'store_locations': '48B2V1y4',
+    'franchise_territories': '83ggzQ8Q'
+  };
+  var franchiseTerritoryStatus = {
+    'available': `cVdR8xRS`,
+    'awarded_franchise': `jCnkMm1x`,
+    'company_operated': `KkM8Wf0C`,
+    'resale': `KNqXkmc7`,
+    'under_offer': `X3yg3yZn`
+  };
 
-  axios.get(endpoint, {
-    params: {
-      apiKey: `${parameters.apiKey}`,
-      body: {
-        mapLayerKey: "UK221"
+  var endpoint = `${protocol}${domain}${data.getBoundaries}?apiKey=${parameters.apiKey}`;
+
+  axios(
+    { method: `${method.post}`,
+      url: endpoint,
+      data: {
+        mapLayerKey: `${mapLayerKey.franchise_territories}`
       }
     }
-  })
+  )
     .then(function (response) {
+      // console.error("SUCCESS\n********************************************************\n", response.data);
       res.locals.statusCode = response.status;
-      res.locals.content = response.status;
+      res.locals.title = 'Success!';
+      res.locals.content = response.data;
+      res.locals.territories = response.data;
+      const getBoundaries = (territory, index) => {
+        territory.boundaryAsJson[0][0].forEach((boundaryCoord)=>{
+          var object = {
+            'lat': boundaryCoord['y'],
+            'lng': boundaryCoord['x']
+          };
+          boundaries[index].push(object);
+        });
+      };
+
+      var territories = response.data;
+      var boundaries = [];
+
+      
+
+      territories.forEach((territory, index)=>{
+        boundaries.push([]);
+        getBoundaries(territory, index);
+      });
+      
+      res.locals.boundaries = boundaries;
+
       res.render(app.locals.site.template, res.locals);
     })
     .catch(function (error) {
+      console.error("ERROR\n********************************************************\n", error);
       res.locals.statusCode = error.response.status;
       res.locals.title = 'Oh noes!';
       res.locals.content = error.response.data.Message || error.response.statusText;
-      // console.error('fucked up ********************************************************', error);
       res.render(app.locals.site.template, res.locals);
     });
-  
 });
 
 // Final catch-all

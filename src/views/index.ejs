@@ -3,13 +3,13 @@
 
 <%- include('shared/head') %>
 
-<body id="interactive-map" data-state="is-active" style="overflow: hidden; position: relative;">
+<body id="interactive-map" data-state="is-active">
 	<%- include('shared/masthead') %>
-	<main class="grid" style="background-image: url(https://www.wired.com/wp-content/uploads/2016/11/GoogleMap-1-1200x630-e1479510841629.jpg);">
-		<% // @TODO: switch these tempates around when the API key arrives! %>
+	<main class="grid">
+		<% // @TODO: Make sure the error state loads %>
 		<% if (locals.statusCode <= 200) { %>
 
-			<%- include('content/error', {locals}) %>
+			<%- include('content/home', {locals}) %>
 
 		<% } else { %>
 
