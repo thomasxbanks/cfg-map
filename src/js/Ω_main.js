@@ -27,6 +27,10 @@ window.onload = () => {
     toggleSidebar.addEventListener('click', (e)=>{
       let target = document.querySelector(`.${e.currentTarget.getAttribute('data-target')}`);
       let currentState = target.getAttribute('data-state');
+      document.querySelectorAll('.sidebar').forEach((sidebar)=>{
+        closeSidebar(sidebar);
+        changeChevronDirection(sidebar.querySelector('button'), 'right');
+      });
       if (currentState === 'is-active') {
         closeSidebar(target);
         changeChevronDirection(e.currentTarget, 'right');
@@ -39,10 +43,12 @@ window.onload = () => {
 
   document.querySelector('.searchbar button').addEventListener('click', (e)=>{
     e.preventDefault();
-    if (e.currentTarget.parentElement.getAttribute('data-state') === 'open') {
-      e.currentTarget.parentElement.submit();
+    let form = e.currentTarget.parentElement;
+    if (form.getAttribute('data-state') === 'open') {
+      form.submit();
     } else {
-      e.currentTarget.parentElement.setAttribute('data-state', 'open');
+      form.setAttribute('data-state', 'open');
+      form.querySelector('input').focus();
     }
   });
 
