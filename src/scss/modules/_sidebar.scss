@@ -13,9 +13,13 @@
     @extend %grid_column;
     @extend %justify-start;
     @extend %align-center;
+    .sidebar_footer {
+      width: 100%;
+      margin-top: auto;
+      @extend %padding;
+    }
   }
   &.sidebar-right {
-    display: none; // @TODO: Put this back in when/if we get the right API call to return the demographic data
     right: 0;
     background-color: rgba($clr_white, 0.9);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
@@ -46,19 +50,43 @@
 .content.with-sidebars {
   flex-grow: 1;
   @extend %richie;
+  transition: $ease-main $speed-std;
 }
 
-.sidebar article {
-  @extend %padding;
-  background: $clr_maroon-flush;
-  color: $clr_white;
-  .title {
-    @extend %ralphie;
-    margin-bottom: 1rem;
+.sidebar-left {
+  button {
+    background: $clr_maroon-flush;
+    color: $clr_white;
   }
-  p {
-    @extend %richie;
-    line-height: 1.5em;
+  form {
+    width: 100%;
+  }
+  article {
+    @extend %padding;
+    background: $clr_maroon-flush;
+    color: $clr_white;
+    .title {
+      @extend %ralphie;
+      margin-bottom: 1rem;
+    }
+    p {
+      @extend %richie;
+      line-height: 1.5em;
+    }
+  }
+  .map-key {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+      td {
+        vertical-align: middle;
+        padding: 0.5rem 0;
+        &:first-child {}
+        &:last-child {
+          @extend %richie;
+        }
+      }
+    }
   }
 }
 
@@ -84,14 +112,9 @@
   }
 }
 
-.sidebar-left {
-  form {
-    width: 100%;
-  }
-}
-
 .sidebar-right {
-  padding-top: 1rem;
+  border-top: 0.5rem solid white;
+  padding-top: 0.5rem;
   .data-table:first-of-type {
     th,
     td {
@@ -115,12 +138,7 @@
       }
     }
   }
-  .button_wrapper {
+  .button-secondary {
     width: 100%;
-    margin-top: auto;
-    @extend %padding;
-    .button-secondary {
-      width: 100%;
-    }
   }
 }

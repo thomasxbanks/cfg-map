@@ -6,56 +6,164 @@
 		// Define arrays and variables
 		var markers = []
 		var boundaries = []
+		var territoryCoordsArray = []
+		var markerCluster
+		var territoryCoords
+		var geocoder = new google.maps.Geocoder;
 
 		// Center of the UK
-		var uk = {lat: <%= locals.content[0].labelY %>, lng: <%= locals.content[0].labelX %>}
+		var uk = {lat: 53.867795, lng: -1.912358} // Keighley, motherflippers!
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 6,
-			center: uk
+			center: uk,
+			disableDefaultUI: true,
+			mapTypeId: 'roadmap'
 		});
-		<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
-			var markerCoordinates = {lat: <%= locals.content[i].labelY %>, lng: <%= locals.content[i].labelX %>}
-			var marker = new google.maps.Marker({
-				label: "<%- locals.content[i].name %>",
-				position: markerCoordinates,
-				map: map
-			});
-			markers.push(marker)
-		<% } %>
-
-		// group markers together
-		var markerCluster = new MarkerClusterer(map, markers,
-			{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
-		);
-
-		// Zoom the map on load to show all markers
-		var bounds = new google.maps.LatLngBounds();
-		for (var i = 0; i < markers.length; i++) {
-		 bounds.extend(markers[i].getPosition());
+		
+		const clusterMarkers = () => {
+			// group markers together
+			markerCluster = new MarkerClusterer(map, markers,
+				{imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+			);
 		}
-		map.fitBounds(bounds);
 
-		<% for( var i = 0; i < parseInt(locals.boundaries.length, 10); i++) { %>
-			// console.log(<%= i %>, <%- JSON.stringify(locals.territories[i].formatting) %>);
-			<% if( locals.territories[i].formatting !== null ){ %>
-				var fillColor = '<%= locals.territories[i].formatting.colour %>'
-				var fillOpacity = '<%= locals.territories[i].formatting.opacity %>'
-			<% } else { %>  
-				var fillColor = '#ffffff'
-				var fillOpacity = 0.2
-			<% } %>
-			var options = {
-				path: <%- JSON.stringify(locals.boundaries[i]) %>,
-				strokeColor: '#000000',
-				strokeOpacity: 0.125,
-				strokeWeight: 1,
-				fillColor: fillColor,
-				fillOpacity: fillOpacity
+		const addMarkers = () => {
+			function pinSymbol(color) {
+				return {
+						path: 'M 18.00,7.50 C 13.03,7.50 9.00,11.53 9.00,16.50 9.00,21.47 13.03,25.50 18.00,25.50 22.97,25.50 27.00,21.47 27.00,16.50 27.00,11.53 22.97,7.50 18.00,7.50 Z M 18.97,47.64 C 18.34,48.18 17.39,48.10 16.86,47.47 16.86,47.47 16.86,47.47 16.86,47.47 5.62,34.26 0.00,24.44 0.00,18.02 0.00,8.07 8.06,0.00 18.00,0.00 27.94,0.00 36.00,8.07 36.00,18.02 36.00,24.44 30.38,34.26 19.14,47.47 19.09,47.53 19.03,47.59 18.97,47.64 Z',
+						fillColor: color,
+						fillOpacity: 1,
+						strokeColor: '#000',
+						strokeWeight: 0.5,
+						strokeOpacity: 1,
+						scale: 0.6
+				};
 			}
-			var territoryCoords = new google.maps.Polygon(options);
-			territoryCoords.setMap(map);
-		<% } %>
+			<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
+				var markerCoordinates = {lat: <%= locals.content[i].labelY %>, lng: <%= locals.content[i].labelX %>}
+				var marker = new google.maps.Marker({
+					id: <%= i %>,
+					name: "<%- locals.content[i].name %>",
+					status: "<%- locals.content[i].formatting.name %>",
+					color: "<%- locals.content[i].formatting.colour %>",
+					icon: pinSymbol("<%- locals.content[i].formatting.colour %>"),
+					position: markerCoordinates,
+					map: map
+				});
+				markers.push(marker)
+				marker.addListener('click', function(e) {
+					console.log(<%= locals.content[this.id] %>)
+					let franchise = {
+						name: this.name,
+						location: this.position,
+						status: this.status,
+						color: this.color
+					}
+					populateSidebar(franchise)
+        });
+			<% } %>
+			clusterMarkers()
+			zoomToFill()
+		}
 
+		const addBoundaries = () => {
+			<% for( var i = 0; i < parseInt(locals.boundaries.length, 10); i++) { %>
+				var options = {
+					path: <%- JSON.stringify(locals.boundaries[i]) %>,
+					strokeColor: '<%= locals.territories[i].formatting.colour %>',
+					strokeOpacity: 1,
+					strokeWeight: 1,
+					fillColor: '<%= locals.territories[i].formatting.colour %>',
+					fillOpacity: '<%= locals.territories[i].formatting.opacity %>'
+				}
+				var territoryCoords = new google.maps.Polygon(options);
+				territoryCoords.setMap(map);
+				territoryCoordsArray.push(territoryCoords);
+			<% } %>
+
+			zoomToFill()
+		}
+
+		const removeMarkers = () => {
+			<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
+				markers[<%= i %>].setMap(null);
+			<% } %>
+			markers = []
+			markerCluster.clearMarkers();
+			centerMap()
+		}
+
+		const removeBoundaries = () => {
+			<% for( var i = 0; i < parseInt(locals.boundaries.length, 10); i++) { %>
+				territoryCoordsArray[<%= i %>].setMap(null);
+			<% } %>
+			territoryCoordsArray = [];
+			centerMap()
+		}
+
+		const zoomToFill = () => {
+			// Zoom the map on load to show all markers
+			var bounds = new google.maps.LatLngBounds();
+			for (var i = 0; i < markers.length; i++) {
+				bounds.extend(markers[i].getPosition());
+			}
+			map.fitBounds(bounds);
+		}
+
+		const centerMap = () => {
+			map.setCenter(uk);
+		}
+
+		const addToMap = (target) => {
+			if (target === 'markers') {
+				addMarkers()
+			} else if (target === 'boundaries') {
+				addBoundaries()
+			}
+		}
+
+		const removeFromMap = (target) => {
+			if (target === 'markers') {
+				removeMarkers()
+			} else if (target === 'boundaries') {
+				removeBoundaries()
+			}
+		}
+
+		document.querySelectorAll('.js-adjust-map input[type="checkbox"]').forEach((checkbox)=>{
+			checkbox.addEventListener('change', (e)=>{
+				let target = e.currentTarget.parentElement.getAttribute('data-target');
+				if (e.currentTarget.checked) {
+					addToMap(target);
+					console.log('is now checked. display', target);
+				} else {
+					removeFromMap(target);
+					console.log('is now unchecked. hide', target);
+				}
+				console.log(e.currentTarget.checked);
+			});
+		});
+
+		addToMap('markers');
+
+		const populateSidebar = (franchise) => {
+			console.log(franchise)
+			let sidebar = document.querySelector('.sidebar-right')
+			let name = sidebar.querySelector('.js-value-name')
+			let address = sidebar.querySelector('.js-value-address')
+			let status = sidebar.querySelector('.js-value-status')
+			name.innerText = franchise.name
+			status.innerText = franchise.status
+			sidebar.style.borderTop = `0.5rem solid ${franchise.color}`
+			sidebar.setAttribute('data-state', 'is-active');
+			geocoder.geocode({'location': franchise.location}, function(results, status) {
+				console.table(results)
+				var components = results[0].address_components
+				var last = (components.length - 1)
+				address_formatted = `${components[last].long_name}`
+				address.innerText = address_formatted
+			});
+		}
 	}
 </script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js" type="text/javascript"></script>

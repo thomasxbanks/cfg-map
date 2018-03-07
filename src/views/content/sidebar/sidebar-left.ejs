@@ -8,34 +8,34 @@
     <form class="js-adjust-map" action="">
       <ul>
         <li>
-          <label class="fancy-checkbox">
+          <label data-target="markers" class="js-adjust-map-markers fancy-checkbox">
             <input checked type="checkbox">
             <span class="checkbox material-icons">check</span>
             <span class="label">All stores</span>
           </label>
         </li>
         <li>
-          <label class="fancy-checkbox">
+          <label data-target="boundaries" class="js-adjust-map-boundaries fancy-checkbox">
             <input type="checkbox">
             <span class="checkbox material-icons">check</span>
-            <span class="label">Postcode areas</span>
-          </label>
-        </li>
-        <li>
-          <label class="fancy-checkbox">
-            <input type="checkbox">
-            <span class="checkbox material-icons">check</span>
-            <span class="label">Postcode districts</span>
-          </label>
-        </li>
-        <li>
-          <label class="fancy-checkbox">
-            <input type="checkbox">
-            <span class="checkbox material-icons">check</span>
-            <span class="label">Postcode sectors</span>
+            <span class="label">Franchise territories</span>
           </label>
         </li>
       </ul>
     </form>
+    <div class="sidebar_footer">
+      <table class="js-map-key map-key">
+        <% for( var i = 0; i < parseInt(locals.statusNames.length, 10); i++) { %>
+          <tr>
+            <td>
+              <%- include('../../atoms/marker.ejs', {color: locals.statusColors[i]}) %>
+            </td>
+            <td>
+              <%= locals.statusNames[i] %>
+            </td>
+          </tr>
+        <% } %>
+      </table>
+    </div>
   </div>
 </aside>

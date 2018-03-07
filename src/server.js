@@ -62,6 +62,8 @@ app.get(['/'], function(req, res) {
       res.locals.title = 'Success!';
       res.locals.content = response.data;
       res.locals.territories = response.data;
+      var territories = response.data;
+      var boundaries = [];
       const getBoundaries = (territory, index) => {
         territory.boundaryAsJson[0][0].forEach((boundaryCoord)=>{
           var object = {
@@ -71,17 +73,42 @@ app.get(['/'], function(req, res) {
           boundaries[index].push(object);
         });
       };
-
-      var territories = response.data;
-      var boundaries = [];
+      const updateColors = (territory) => {  
+        if( territory.formatting === null ){ 
+          territory.formatting = {
+            name: 'Available',
+            colour: '#24C11A',
+            opacity: 0.35
+          };
+        } else {
+          if (territory.formatting.name === 'Awarded Franchise') {
+            territory.formatting.colour = '#C1371A';
+          } else if (territory.formatting.name === 'Company Operated') {
+            territory.formatting.colour = '#004492';
+          } else if (territory.formatting.name === 'Resale') {
+            territory.formatting.colour = '#FBD90D';
+          } else if (territory.formatting.name === 'Under Offer') {
+            territory.formatting.colour = '#DC6A29';
+          } else if (territory.formatting.name === 'Available') {
+            territory.formatting.colour = '#24C11A';
+          } else {
+            territory.formatting.colour = '#24C11A';
+          }
+          territory.formatting.opacity = 0.35;
+        }
+      };
 
       territories.forEach((territory, index)=>{
         boundaries.push([]);
         getBoundaries(territory, index);
+        updateColors(territory);
       });
-      
-      res.locals.boundaries = boundaries;
 
+      res.locals.statusNames = [...new Set(territories.map(item => item.formatting.name))];
+      res.locals.statusColors = [...new Set(territories.map(item => item.formatting.colour))];
+
+      res.locals.boundaries = boundaries;
+      console.log(res.locals.statusNames, res.locals.statusColors);
       res.render(app.locals.site.template, res.locals);
     })
     .catch(function (error) {
