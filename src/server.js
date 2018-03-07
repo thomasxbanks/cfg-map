@@ -75,8 +75,6 @@ app.get(['/'], function(req, res) {
       var territories = response.data;
       var boundaries = [];
 
-      
-
       territories.forEach((territory, index)=>{
         boundaries.push([]);
         getBoundaries(territory, index);

@@ -46,8 +46,8 @@ body {
 }
 
 .searchbar {
-	float: right;
-	display: inline-flex;
+	float: right; //display: inline-flex;
+	display: none; // @TODO: Put this back in when/if we get the right API call to return the demographic data
 	align-items: center;
 	input {
 		position: absolute;

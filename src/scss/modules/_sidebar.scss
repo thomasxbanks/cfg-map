@@ -15,6 +15,7 @@
     @extend %align-center;
   }
   &.sidebar-right {
+    display: none; // @TODO: Put this back in when/if we get the right API call to return the demographic data
     right: 0;
     background-color: rgba($clr_white, 0.9);
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
