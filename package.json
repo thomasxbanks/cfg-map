@@ -9,7 +9,7 @@
     "watch": "gulp watch",
     "build": "gulp",
     "production": "gulp production",
-    "deploy": "git pull && gulp && vi ./dist/server.js",
+    "deploy": "git pull && gulp && echo \"You need to edit the app.listen(8008) function to app.listen(80) && \" && vi ./dist/server.js",
     "launch": "nodemon ./dist/server.js"
   },
   "keywords": [],
