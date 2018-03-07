@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "GT Walsheim";
+  src: url('/fonts/GTWalsheim-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('/fonts/GTWalsheim-Regular.woff') format('woff')
+}
+
+@font-face {
+  font-family: "GT Walsheim Medium";
+  src: url('/fonts/GTWalsheim-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+  url('/fonts/GTWalsheim-Medium.woff') format('woff')
+}
+
+@font-face {
+  font-family: "GT Walsheim Bold";
+  src: url('/fonts/GTWalsheim-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+  url('/fonts/GTWalsheim-Bold.woff') format('woff')
+}
+
 // Face Stack/Family
 $font_face-main: "GT Walsheim",
 cursive,
@@ -20,4 +38,5 @@ $lh: 1.66em;
 // Font Colors
 $font_color-main: $clr_black;
 $font_color-invert: $clr_white;
-$font_color-light: lighten($font_color-main, 20%);
+$font_color-light: lighten($font_color-main,
+20%);

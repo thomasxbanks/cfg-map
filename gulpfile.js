@@ -47,9 +47,9 @@ let path = {
     i: root + src + 'img/**/*',
     o: root + dist + 'img/'
   },
-  data: {
-    i: root + src + 'data/**/*.json',
-    o: root + dist + 'data/'
+  fonts: {
+    i: root + src + 'fonts/**/*',
+    o: root + dist + 'fonts/'
   },
   views: {
     i: root + src + 'views/**/*.ejs',
@@ -89,7 +89,7 @@ gulp.task('default', function(callback) {
     outputStyle: 'expanded'
   };
   envProd = false;
-  runSequence('clean:dist', 'sass', 'js', 'img', 'data', 'views', 'txt', 'server', 'modules', callback);
+  runSequence('clean:dist', 'sass', 'js', 'img', 'fonts', 'views', 'txt', 'server', 'modules', callback);
 });
 
 // Watching for changes
@@ -103,7 +103,7 @@ gulp.task('watch', function(callback) {
     gulp.watch(path.js.i, ['js', browserSync.reload]);
     gulp.watch(path.css.i, ['sass', browserSync.reload]);
     gulp.watch(path.img.i, ['img', browserSync.reload]);
-    gulp.watch(path.data.i, ['data', browserSync.reload]);
+    gulp.watch(path.fonts.i, ['fonts', browserSync.reload]);
     gulp.watch(path.views.i, ['views', browserSync.reload]);
     gulp.watch(path.server.i, ['server', browserSync.reload]);
   });
@@ -118,7 +118,7 @@ gulp.task('production', function(callback) {
     outputStyle: 'compressed'
   };
   envProd = true;
-  runSequence('clean:dist', 'sass', 'js', 'img', 'data', 'views', 'txt', 'server', 'modules', () => {
+  runSequence('clean:dist', 'sass', 'js', 'img', 'fonts', 'views', 'txt', 'server', 'modules', () => {
     console.log('production build finished');
   });
 });
@@ -146,11 +146,10 @@ gulp.task('img', function() {
     .pipe(gulp.dest(path.img.o));
 });
 
-// Data files
-gulp.task('data', function() {
-  gulp.src([path.data.i])
-    .pipe((envProd) ? jsonminify() : noop())
-    .pipe(gulp.dest(path.data.o));
+// fonts files
+gulp.task('fonts', function() {
+  gulp.src([path.fonts.i])
+    .pipe(gulp.dest(path.fonts.o));
 });
 
 // 3rd party plugins
