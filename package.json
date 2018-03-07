@@ -8,7 +8,9 @@
     "start": "gulp && gulp watch",
     "watch": "gulp watch",
     "build": "gulp",
-    "production": "gulp production"
+    "production": "gulp production",
+    "deploy": "git pull && gulp && vi ./dist/server.js",
+    "launch": "nodemon ./dist/server.js"
   },
   "keywords": [],
   "author": "",
