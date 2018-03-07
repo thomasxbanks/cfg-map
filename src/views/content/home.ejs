@@ -36,11 +36,13 @@
 						strokeColor: '#000',
 						strokeWeight: 0.5,
 						strokeOpacity: 1,
-						scale: 0.6
+						scale: 0.5,
+						anchor: new google.maps.Point(18, 48)
 				};
 			}
 			<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
 				var markerCoordinates = {lat: <%= locals.content[i].labelY %>, lng: <%= locals.content[i].labelX %>}
+
 				var marker = new google.maps.Marker({
 					id: <%= i %>,
 					name: "<%- locals.content[i].name %>",
