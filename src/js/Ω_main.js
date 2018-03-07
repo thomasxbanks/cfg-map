@@ -2,7 +2,6 @@
 
 window.onload = () => {
   console.log('browser js loaded');
-  console.log('Page Object in main.js', page);
   getBrowserDimensions();
   let masthead = document.getElementById('masthead');
   let mastheadHeight = getComputedHeight(masthead);
