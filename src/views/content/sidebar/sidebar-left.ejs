@@ -1,11 +1,10 @@
-<aside title="Explore the map" class="sidebar sidebar-left" data-state="not-active">
+<aside title="Filters" class="sidebar sidebar-left" data-state="not-active">
   <button aria-label="Toggle the left sidebar" class="js-toggle-sidebar toggle-sidebar material-icons" data-target="sidebar-left">chevron_right</button>
   <div class="inner">
     <article>
-      <h2 class="title">Explore the map</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam, eius assumenda. Perferendis eligendi commodi dolorem numquam, ipsam iste corrupti totam!</p>
+      <h2 class="title">Filters</h2>
     </article>
-    <table class="js-adjust-map map-key">
+    <table class="js-adjust-map filter-table">
       <tr>
         <td>
           <%- include('../../atoms/checkbox.ejs', {name: 'Stores', slug: 'markers', color: 'rgba(0,0,0,0.25)', checked: 'checked'}) %>
@@ -38,7 +37,23 @@
       <% } %>
     </table>
     <div class="sidebar_footer">
-      
+      <table class="map-key">
+        <tr>
+          <th colspan="2">
+            <spn class="title">Colour key</spn>
+          </th>
+        </tr>
+        <% for( var i = 0; i < parseInt(locals.statusNames.length, 10); i++) { %>
+          <tr>
+            <td>
+              <%- include('../../atoms/marker.ejs', {color: locals.statusColors[i]}) %>
+            </td>
+            <td>
+              <%- include('../../atoms/title.ejs', {text: locals.statusNames[i]}) %>
+            </td>
+          </tr>
+        <% } %>
+      </table>
     </div>
   </div>
 </aside>
