@@ -44,16 +44,16 @@ window.onload = () => {
     });
   });
 
-  document.querySelector('.searchbar button').addEventListener('click', (e)=>{
-    e.preventDefault();
-    let form = e.currentTarget.parentElement;
-    if (form.getAttribute('data-state') === 'open') {
-      form.submit();
-    } else {
-      form.setAttribute('data-state', 'open');
-      form.querySelector('input').focus();
-    }
-  });
+  // document.querySelector('.searchbar button').addEventListener('click', (e)=>{
+  //   e.preventDefault();
+  //   let form = e.currentTarget.parentElement;
+  //   if (form.getAttribute('data-state') === 'open') {
+  //     form.submit();
+  //   } else {
+  //     form.setAttribute('data-state', 'open');
+  //     form.querySelector('input').focus();
+  //   }
+  // });
 
   // console.log(browser.width, browser.height, screen.width, screen.height);
 };

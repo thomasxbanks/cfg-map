@@ -33,15 +33,12 @@ body {
 	z-index: 1000;
 	width: 100%;
 	background-color: $clr_congress-blue;
+	text-align: center;
 	.logo {
 		max-width: 100%;
 		max-height: 34px;
 		object-fit: contain;
 		margin: 1rem auto;
-	}
-	.col-third {
-		flex-basis: 33.33%;
-		flex-grow: 3;
 	}
 }
 
