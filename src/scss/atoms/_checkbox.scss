@@ -1,11 +1,4 @@
 label.fancy-checkbox {
-  display: block;
-  line-height: 1.25rem;
-  padding: 1.5rem;
-  @extend %border-bottom-thin;
-  &:hover {
-    background: $clr_wild-sand;
-  }
   input[type="checkbox"] {
     position: absolute;
     left: -50000px;

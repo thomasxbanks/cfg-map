@@ -78,12 +78,25 @@
     width: 100%;
     border-collapse: collapse;
     tr {
+      &:hover {
+        background: $clr_wild-sand;
+      }
+      th {
+        text-align: left;
+        .title {
+          display: block;
+          @extend %ralphie;
+          margin-bottom: 1rem;
+        }
+      }
       td {
+        line-height: 1.25rem;
+        padding: 1.5rem;
+        @extend %border-bottom-thin;
         vertical-align: middle;
-        padding: 0.5rem 0;
-        &:first-child {}
         &:last-child {
-          @extend %richie;
+          vertical-align: middle;
+          text-align: center;
         }
       }
     }
@@ -113,8 +126,7 @@
 }
 
 .sidebar-right {
-  border-top: 0.5rem solid white;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   .data-table:first-of-type {
     th,
     td {

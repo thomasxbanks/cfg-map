@@ -5,37 +5,40 @@
       <h2 class="title">Explore the map</h2>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam, eius assumenda. Perferendis eligendi commodi dolorem numquam, ipsam iste corrupti totam!</p>
     </article>
-    <form class="js-adjust-map" action="">
-      <ul>
-        <li>
-          <label data-target="markers" class="js-adjust-map-markers fancy-checkbox">
-            <input checked type="checkbox">
-            <span class="checkbox material-icons">check</span>
-            <span class="label">All stores</span>
-          </label>
-        </li>
-        <li>
-          <label data-target="boundaries" class="js-adjust-map-boundaries fancy-checkbox">
-            <input type="checkbox">
-            <span class="checkbox material-icons">check</span>
-            <span class="label">Franchise territories</span>
-          </label>
-        </li>
-      </ul>
-    </form>
+    <table class="js-adjust-map map-key">
+      <tr>
+        <td>
+          <%- include('../../atoms/checkbox.ejs', {name: 'Stores', slug: 'markers', color: 'rgba(0,0,0,0.25)', checked: 'checked'}) %>
+        </td>
+        <td>
+          <%- //include('../../atoms/marker.ejs', {color: 'rgba(0,0,0,0.25)'}) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%- include('../../atoms/checkbox.ejs', {name: 'Franchise Territories', slug: 'boundaries', color: 'rgba(0,0,0,0.25)', checked: null}) %>
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <% for( var i = 0; i < parseInt(locals.statusNames.length, 10); i++) { %>
+        <tr style="display: none;">
+          <td style="border-bottom-color: <%= locals.statusColors[i] %>;">
+            <%- include('../../atoms/checkbox.ejs', {
+                name: locals.statusNames[i], 
+                slug: locals.statusNames[i].toLowerCase().replace(/ /g, '-'), 
+                color: locals.statusColors[i], 
+                checked: null}) %>
+          </td>
+          <td style="border-bottom-color: <%= locals.statusColors[i] %>;">
+            <%- include('../../atoms/marker.ejs', {color: locals.statusColors[i]}) %>
+          </td>
+        </tr>
+      <% } %>
+    </table>
     <div class="sidebar_footer">
-      <table class="js-map-key map-key">
-        <% for( var i = 0; i < parseInt(locals.statusNames.length, 10); i++) { %>
-          <tr>
-            <td>
-              <%- include('../../atoms/marker.ejs', {color: locals.statusColors[i]}) %>
-            </td>
-            <td>
-              <%= locals.statusNames[i] %>
-            </td>
-          </tr>
-        <% } %>
-      </table>
+      
     </div>
   </div>
 </aside>
