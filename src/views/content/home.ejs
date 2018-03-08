@@ -118,8 +118,8 @@
 				removeBoundaries()
 			}
 		}
-
-		document.querySelectorAll('.js-adjust-map input[type="checkbox"]').forEach((checkbox)=>{
+		var checkboxes = [].slice.call(document.querySelectorAll('.js-adjust-map input[type="checkbox"]'))
+		checkboxes.forEach((checkbox)=>{
 			checkbox.addEventListener('change', (e)=>{
 				let target = e.currentTarget.parentElement.getAttribute('data-target');
 				if (e.currentTarget.checked) {

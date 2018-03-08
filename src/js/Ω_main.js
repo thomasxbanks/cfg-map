@@ -5,7 +5,8 @@ window.onload = () => {
   getBrowserDimensions();
   let masthead = document.getElementById('masthead');
   let mastheadHeight = getComputedHeight(masthead);
-  document.querySelectorAll('.sidebar').forEach((sidebar)=>{
+  var sidebars = [].slice.call(document.querySelectorAll('.sidebar'));
+  sidebars.forEach((sidebar)=>{
     sidebar.style.top = mastheadHeight;
     sidebar.style.height = `calc(100vh - ${mastheadHeight})`;
   });
@@ -24,12 +25,12 @@ window.onload = () => {
   const openSidebar = (element) =>{
     element.setAttribute('data-state', 'is-active');
   };
-
-  document.querySelectorAll('.js-toggle-sidebar').forEach((toggleSidebar)=>{
+  var sidebarToggles = [].slice.call(document.querySelectorAll('.js-toggle-sidebar'));
+  sidebarToggles.forEach((toggleSidebar)=>{
     toggleSidebar.addEventListener('click', (e)=>{
       let target = document.querySelector(`.${e.currentTarget.getAttribute('data-target')}`);
       let currentState = target.getAttribute('data-state');
-      document.querySelectorAll('.sidebar').forEach((sidebar)=>{
+      sidebars.forEach((sidebar)=>{
         closeSidebar(sidebar);
         changeChevronDirection(sidebar.querySelector('button'), 'right');
       });
@@ -52,15 +53,6 @@ window.onload = () => {
       form.setAttribute('data-state', 'open');
       form.querySelector('input').focus();
     }
-  });
-
-  document.querySelectorAll('.sidebar-right .data-table .button-tertiary').forEach((demographicButton)=>{
-    demographicButton.addEventListener('click', (e)=>{
-      e.currentTarget.parentElement.querySelectorAll('.button-tertiary').forEach((demoButton)=>{
-        demoButton.setAttribute('data-state', 'not-active');
-      });
-      e.currentTarget.setAttribute('data-state', 'is-active');
-    });
   });
 
   // console.log(browser.width, browser.height, screen.width, screen.height);
