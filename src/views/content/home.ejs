@@ -50,12 +50,12 @@
 				markers.push(marker)
 				marker.addListener('click', function(e) {
 					let franchise = {
-						name: this.name,
+						name: `${this.name} Store`,
 						location: this.position,
 						status: this.status,
 						color: this.color
 					}
-					populateSidebar(franchise)
+					populateSidebar(franchise);
         });
 			<% } %>
 			clusterMarkers();
@@ -74,6 +74,15 @@
 				var territoryCoords = new google.maps.Polygon(options);
 				territoryCoords.setMap(map);
 				territoryCoordsArray.push(territoryCoords);
+				territoryCoords.addListener('click', function(e) {
+					let franchise = {
+						name: '<%= locals.territories[i].name %> Territory',
+						location: '<%= locals.territories[i].name %>',
+						status: '<%= locals.territories[i].formatting.name %>',
+						color: '<%= locals.territories[i].formatting.colour %>'
+					}
+					populateSidebar(franchise);
+        });
 			<% } %>
 		}
 

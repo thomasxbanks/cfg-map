@@ -456,7 +456,7 @@ app.get(['/'], function(req, res) {
         "status": "Available"
       },
       {
-        "name": "GREAT YAYMOUTH",
+        "name": "GREAT YARMOUTH",
         "postcode": "NR30 1RN",
         "lat": 52.598233,
         "lng": 1.728047,
