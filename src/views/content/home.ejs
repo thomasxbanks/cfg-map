@@ -78,7 +78,7 @@
 		}
 
 		const removeMarkers = () => {
-			<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
+			<% for( var i=0; i < parseInt(locals.markers.length, 10); i++) { %>
 				markers[<%= i %>].setMap(null);
 			<% } %>
 			markers = [];
