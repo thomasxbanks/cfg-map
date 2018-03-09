@@ -1,5 +1,8 @@
 <%- include('sidebar/sidebar-left', {locals}) %>
 <div id="map" class="content with-sidebars"></div>
+<div>
+	<%- JSON.stringify(locals.markers) %>
+</div>
 <%- include('sidebar/sidebar-right', {locals}) %>
 <script>
 	function initMap() {
@@ -36,15 +39,14 @@
 						anchor: new google.maps.Point(18, 48)
 				};
 			}
-			<% for( var i=0; i < parseInt(locals.content.length, 10); i++) { %>
-				var markerCoordinates = {lat: <%= locals.content[i].labelY %>, lng: <%= locals.content[i].labelX %>}
+			<% for( var i=0; i < parseInt(locals.markers.length, 10); i++) { %>
+				var markerCoordinates = {lat: <%= locals.markers[i].lat %>, lng: <%= locals.markers[i].lng %>}
 
 				var marker = new google.maps.Marker({
-					id: <%= i %>,
-					name: "<%- locals.content[i].name %>",
-					status: "<%- locals.content[i].formatting.name %>",
-					color: "<%- locals.content[i].formatting.colour %>",
-					icon: pinSymbol("<%- locals.content[i].formatting.colour %>"),
+					name: "<%- locals.markers[i].name %>",
+					status: "Available",
+					color: "#004492",
+					icon: pinSymbol("#004492"),
 					position: markerCoordinates,
 					map: map
 				});
