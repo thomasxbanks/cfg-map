@@ -1,8 +1,5 @@
 <%- include('sidebar/sidebar-left', {locals}) %>
 <div id="map" class="content with-sidebars"></div>
-<div>
-	<%- JSON.stringify(locals.markers) %>
-</div>
 <%- include('sidebar/sidebar-right', {locals}) %>
 <script>
 	function initMap() {
